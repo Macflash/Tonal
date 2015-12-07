@@ -28,7 +28,7 @@ class Toner {
             console.log($scope.baseFrequency);
             return Math.pow($scope.octave, x / $scope.steps) * $scope.baseFrequency; 
         }
-        
+
         $scope.playNote = (x: number) => {
             console.log("playing note");
             var f = $scope.getNote(x);
@@ -44,13 +44,47 @@ class Toner {
             o.stop(audioCtx.currentTime + 2);
         }
 
+        document.onkeypress = (e: KeyboardEvent) => {
+            var k = String.fromCharCode(e.keyCode);
+            var num = -1;
+            switch (k) {
+                case 'a':
+                    num = 0;
+                    break;
+                case 's':
+                    num = 1;
+                    break;
+                case 'd':
+                    num = 2;
+                    break;
+                case 'f':
+                    num = 3;
+                    break;
+                case 'g':
+                    num = 4;
+                    break;
+                case 'h':
+                    num = 5;
+                    break;
+            }
+
+            if (num < 0) {
+                // this is alphabetical
+                num = e.keyCode - 97;
+            }
+
+            $scope.playNote(num);
+        };
+
         $scope.updateKeys = () => {
-            $scope.keys.length = $scope.steps;
+            $scope.keys.length = $scope.steps + 1;
             console.log($scope.steps);
             console.log($scope.keys);
+            console.log(new Array($scope.steps + 1));
         }
 
         $scope.updateKeys();
+
     }
 }
 

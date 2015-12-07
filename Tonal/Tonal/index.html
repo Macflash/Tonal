@@ -11,9 +11,9 @@
 <body ng-app="Tonal">
     <div id="content" >
         <div ng-controller="Toner" style="width:375px; background-color: white; padding: 10px;">
-            Base: <input ng-model="baseFrequency"/><br />
-            Octave: <input ng-model="octave" /><br />
-            Steps: <input ng-model="steps" /><br />
+            Base: <input type="number" ng-model="baseFrequency"/><br />
+            Octave: <input type="number" ng-model="octave" /><br />
+            Steps: <input type="number" ng-model="steps" /><br />
             Volume: <input type="range" min="0" max="1" step=".1" ng-model="volume" />{{volume}}<br />
             <button ng-click="updateKeys()">Update Keyboard</button><br />
             <button ng-repeat="key in keys track by $index" ng-click="playNote($index)">{{$index}}</button>
