@@ -24,6 +24,7 @@
   <ItemGroup>
     <Content Include="angular.js" />
     <Content Include="app.css" />
+    <Content Include="app.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
   </ItemGroup>
@@ -68,6 +69,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <OutputPath>.\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>

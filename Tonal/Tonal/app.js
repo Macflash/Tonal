@@ -1,13 +1,8 @@
-﻿var TonalApp = angular.module('Tonal', []);
-
-class Toner {
-    public static $inject = ['$scope'];
-    
-    constructor($scope: any) {
-        var audioCtx = new ((<any>window).AudioContext || (<any>window).webkitAudioContext)();
+var TonalApp = angular.module('Tonal', []);
+var Toner = (function () {
+    function Toner($scope) {
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         var noteLength = 100;
-
-
         console.log("hey");
         // Default scale
         $scope.baseFrequency = 440;
@@ -15,21 +10,18 @@ class Toner {
         $scope.steps = 12;
         $scope.keys = new Array($scope.steps);
         $scope.volume = .2;
-
-        $scope.getLength = (x: number) => {
+        $scope.getLength = function (x) {
             return new Array(x);
-        }
-
+        };
         // returns a note that is x steps above the base frequency
-        $scope.getNote = (x: number) => {
+        $scope.getNote = function (x) {
             console.log(x);
             console.log($scope.octave);
             console.log($scope.steps);
             console.log($scope.baseFrequency);
-            return Math.pow($scope.octave, x / $scope.steps) * $scope.baseFrequency; 
-        }
-        
-        $scope.playNote = (x: number) => {
+            return Math.pow($scope.octave, x / $scope.steps) * $scope.baseFrequency;
+        };
+        $scope.playNote = function (x) {
             console.log("playing note");
             var f = $scope.getNote(x);
             console.log(f);
@@ -42,29 +34,28 @@ class Toner {
             o.frequency.value = f;
             o.start();
             o.stop(audioCtx.currentTime + 2);
-        }
-
-        $scope.updateKeys = () => {
+        };
+        $scope.updateKeys = function () {
             $scope.keys.length = $scope.steps;
             console.log($scope.steps);
             console.log($scope.keys);
-        }
-
+        };
         $scope.updateKeys();
     }
-}
-
+    Toner.$inject = ['$scope'];
+    return Toner;
+})();
 TonalApp.controller('Toner', Toner);
-
-class Keyboard {
-    public static $inject = ['$scope'];
-    constructor($scope: any) {
+var Keyboard = (function () {
+    function Keyboard($scope) {
         $scope.y = "hey";
-        $scope.playNote = (x) => {
+        $scope.playNote = function (x) {
             console.log("trying to play...");
             $scope.$parent.playNote(x);
-        }
+        };
     }
-}
-
+    Keyboard.$inject = ['$scope'];
+    return Keyboard;
+})();
 TonalApp.controller('Keyboard', Keyboard);
+//# sourceMappingURL=app.js.map
